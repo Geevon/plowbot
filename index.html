@@ -1,0 +1,872 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Surprise 💌</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ffd6e7, #dce9ff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 650px;
+        background: rgba(255,255,255,0.96);
+        border-radius: 28px;
+        padding: 35px;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        position: relative;
+        z-index: 5;
+    }
+
+    h1 {
+        color: #ff4f81;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        color: #444;
+    }
+
+    p {
+        color: #666;
+        line-height: 1.7;
+    }
+
+    .emoji {
+        font-size: 60px;
+        margin-bottom: 10px;
+    }
+
+    .progress {
+        color: #999;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        border: none;
+        padding: 14px 25px;
+        margin: 8px;
+        border-radius: 30px;
+        background: #ff5c8a;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.06);
+        background: #ff3b72;
+    }
+
+    input {
+        width: 85%;
+        padding: 14px;
+        margin: 15px 0;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        font-size: 16px;
+        text-align: center;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #ff7fa4;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .message {
+        min-height: 28px;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #ff4f81;
+    }
+
+    .hint {
+        background: #fff5f8;
+        border-radius: 15px;
+        padding: 14px;
+        margin-top: 20px;
+        font-size: 14px;
+        color: #777;
+    }
+
+    .steps {
+        background: #f8f8f8;
+        border-radius: 15px;
+        padding: 15px;
+        text-align: left;
+        margin-top: 15px;
+    }
+
+    .steps p {
+        margin: 8px 0;
+    }
+
+    .choice {
+        min-width: 130px;
+    }
+
+    #finalImage {
+        width: 100%;
+        max-height: 450px;
+        object-fit: cover;
+        border-radius: 20px;
+        margin: 20px 0;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .letter {
+        background: #fff7fa;
+        border-radius: 20px;
+        padding: 25px;
+        text-align: left;
+        line-height: 1.8;
+    }
+
+    .letter h2 {
+        text-align: center;
+        color: #ff4f81;
+    }
+
+    .success {
+        font-size: 22px;
+        color: #ff4f81;
+        font-weight: bold;
+    }
+
+    .heart {
+        position: fixed;
+        top: -50px;
+        font-size: 25px;
+        z-index: 10;
+        animation: fall linear forwards;
+        pointer-events: none;
+    }
+
+    @keyframes fall {
+        from {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    .shake {
+        animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+        0%, 100% {
+            transform: translateX(0);
+        }
+
+        25% {
+            transform: translateX(-8px);
+        }
+
+        75% {
+            transform: translateX(8px);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- START -->
+    <section id="start">
+
+        <div class="emoji">🎁</div>
+
+        <h1>A Little Surprise</h1>
+
+        <p>
+            Before you can see what's waiting for you,
+            you have to solve a few little riddles.
+        </p>
+
+        <p>
+            <strong>Warning:</strong> Think carefully. 😂
+        </p>
+
+        <button onclick="startGame()">
+            Start the Mystery 🔍
+        </button>
+
+    </section>
+
+
+    <!-- RIDDLE 1 -->
+    <section id="riddle1" class="hidden">
+
+        <div class="progress">RIDDLE 1 OF 5 🧩</div>
+
+        <div class="emoji">🚁</div>
+
+        <h2>The Helicopter</h2>
+
+        <p>
+            Naay helicopter nga nagdala og
+            <strong>500 ka bricks</strong>.
+        </p>
+
+        <p>
+            Pero usa ka brick ang nahulog.
+            <br><br>
+            <strong>Pila ka bricks ang nabilin?</strong>
+        </p>
+
+        <div class="hint">
+            💡 Clue: Dili ni math exam.
+            Simple ra kaayo — hunahunaa lang kung pila ang
+            nabilin human mahulog ang usa.
+        </div>
+
+        <input id="answer1" placeholder="Your answer...">
+
+        <br>
+
+        <button onclick="checkRiddle1()">
+            Submit
+        </button>
+
+        <div id="message1" class="message"></div>
+
+    </section>
+
+
+    <!-- RIDDLE 2 -->
+    <section id="riddle2" class="hidden">
+
+        <div class="progress">RIDDLE 2 OF 5 🧩</div>
+
+        <div class="emoji">🐘</div>
+
+        <h2>The Elephant</h2>
+
+        <p>
+            Nice! You found the answer. 😏
+        </p>
+
+        <p>
+            Now...
+            <br><br>
+            <strong>
+            Unsaon nimo pagsulod ang elephant
+            sa refrigerator?
+            </strong>
+        </p>
+
+        <div class="hint">
+            💡 Clue: Ayaw paghunahuna og magic.
+            Ang refrigerator naa ra sa imong atubangan.
+            Unsa man imong unang buhaton para makasulod ang elephant?
+        </div>
+
+        <input id="answer2" placeholder="Your answer...">
+
+        <br>
+
+        <button onclick="checkRiddle2()">
+            Submit
+        </button>
+
+        <div id="message2" class="message"></div>
+
+    </section>
+
+
+    <!-- RIDDLE 3 -->
+    <section id="riddle3" class="hidden">
+
+        <div class="progress">RIDDLE 3 OF 5 🧩</div>
+
+        <div class="emoji">🦒</div>
+
+        <h2>The Giraffe</h2>
+
+        <p>
+            Good job! Pero naa pay problema. 👀
+        </p>
+
+        <p>
+            <strong>
+            Unsaon nimo pagsulod ang giraffe
+            sa refrigerator?
+            </strong>
+        </p>
+
+        <div class="hint">
+            💡 Clue: Naay usa ka animal nga
+            naa na sulod sa refrigerator.
+            Dili pwede nga duha sila didto.
+            Kinsa ang kinahanglan nimong kuhaon una?
+        </div>
+
+        <input id="answer3" placeholder="Your answer...">
+
+        <br>
+
+        <button onclick="checkRiddle3()">
+            Submit
+        </button>
+
+        <div id="message3" class="message"></div>
+
+    </section>
+
+
+    <!-- RIDDLE 4 -->
+    <section id="riddle4" class="hidden">
+
+        <div class="progress">RIDDLE 4 OF 5 🧩</div>
+
+        <div class="emoji">🐊</div>
+
+        <h2>The Crocodile Party</h2>
+
+        <p>
+            Nagpa-party ang crocodile.
+            Gi-invite niya ang <strong>tanang animals</strong>.
+        </p>
+
+        <p>
+            Pero naay usa ka animal nga
+            <strong>wala naka-attend.</strong>
+        </p>
+
+        <p>
+            <strong>Kinsa siya?</strong>
+        </p>
+
+        <div class="hint">
+            💡 Clue: Wala sya sa party kay nagdinangag. 👀
+        </div>
+
+        <input id="answer4" placeholder="Your answer...">
+
+        <br>
+
+        <button onclick="checkRiddle4()">
+            Submit
+        </button>
+
+        <div id="message4" class="message"></div>
+
+    </section>
+
+
+    <!-- RIDDLE 5 -->
+    <section id="riddle5" class="hidden">
+
+        <div class="progress">RIDDLE 5 OF 5 🧩</div>
+
+        <div class="emoji">🌊</div>
+
+        <h2>The River</h2>
+
+        <p>
+            Naglakbay ka ug nakaabot ka sa
+            usa ka river.
+        </p>
+
+        <p>
+            Puno kini og dagkong crocodiles.
+            🐊🐊🐊🐊🐊
+        </p>
+
+        <p>
+            <strong>
+            Unsa imong buhaton aron makatabok?
+            </strong>
+        </p>
+
+        <button class="choice" onclick="wrongRiver()">
+            Mouli 🏃
+        </button>
+
+        <button class="choice" onclick="correctRiver()">
+            Molangoy 🏊
+        </button>
+
+        <button class="choice" onclick="wrongRiver()">
+            Molupad 🚁
+        </button>
+
+        <div class="hint">
+            💡 Clue: Way clue sayon ra ang answer amaw.
+        </div>
+
+        <div id="message5" class="message"></div>
+
+    </section>
+
+
+    <!-- FINAL RIDDLE -->
+    <section id="finalRiddle" class="hidden">
+
+        <div class="progress">FINAL RIDDLE 🔐</div>
+
+        <div class="emoji">🧱</div>
+
+        <h2>Wait... You're Not Done Yet. 😈</h2>
+
+        <p>
+            Nakatalabok na ka sa river.
+            <br>
+            Wala ka kaonon sa crocodile.
+        </p>
+
+        <p>
+            Abi nimo safe na ka...
+        </p>
+
+        <p>
+            <strong>
+            Pero kalit lang, namatay ka.
+            <br><br>
+            Ngano man?
+            </strong>
+        </p>
+
+        <div class="hint">
+            💡 Clue: Gamita imo hunahuna. 👀
+        </div>
+
+        <input id="finalAnswer" placeholder="Your answer...">
+
+        <br>
+
+        <button onclick="checkFinal()">
+            Solve the Mystery 🔐
+        </button>
+
+        <div id="finalMessage" class="message"></div>
+
+    </section>
+
+
+    <!-- SUCCESS -->
+    <section id="success" class="hidden">
+
+        <div class="emoji">🎉</div>
+
+        <h1>YOU DID IT! ❤️</h1>
+
+        <p class="success">
+            You solved the entire mystery!
+        </p>
+
+        <p>
+            And now...
+            <br>
+            here's what you've been trying to unlock.
+        </p>
+
+        <button onclick="revealSurprise()">
+            🔓 Reveal My Surprise
+        </button>
+
+    </section>
+
+
+    <!-- FINAL SURPRISE -->
+    <section id="surprise" class="hidden">
+
+        <div class="emoji">💖</div>
+
+        <h1>Surprise! ❤️</h1>
+
+        <p>
+            You actually made it until the end. 😂
+        </p>
+
+        <!--
+            IMPORTANT:
+            Put your picture in the same folder as this HTML file.
+            Name it: picture.jpg
+
+            If your picture has another filename,
+            change "picture.jpg" below.
+        -->
+
+        <img
+            id="finalImage"
+            src="IMG20240223124032.jpg"
+            alt="Our Picture"
+        >
+
+        <div class="letter">
+
+            <h2>💌 A Little Letter For You</h2>
+
+            <p>
+                Dear You,
+            </p>
+
+            <p>
+                If you're reading this, it means you survived
+                all five riddles. 😂
+            </p>
+
+            <p>
+                I know this was just a silly little game,
+                but I wanted to make something that wasn't
+                just another ordinary message.
+            </p>
+
+            <p>
+                You had to follow the clues, remember the
+                previous answers, and somehow survive a
+                helicopter, an elephant, a giraffe,
+                crocodiles, and one very unfortunate brick.
+                😂🧱
+            </p>
+
+            <p>
+                And somehow, after all that...
+                you still made it here.
+            </p>
+
+            <p>
+                I hope this little surprise made you smile.
+                ❤️
+            </p>
+
+            <p>
+                Always remember:
+                sometimes the smallest things can become
+                the best memories. Basta ayawg kalimot ug ESMIRINGHOY. 😏
+            </p>
+
+            <p>
+                With WORKMATE,<br>
+                <strong>Your PINAKAGWAPO SA LIBRARY 💕</strong>
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+function hideAll() {
+
+    document.querySelectorAll("section").forEach(section => {
+        section.classList.add("hidden");
+    });
+
+}
+
+
+function startGame() {
+
+    hideAll();
+
+    document.getElementById("riddle1")
+        .classList.remove("hidden");
+
+}
+
+
+/* RIDDLE 1 */
+
+function checkRiddle1() {
+
+    let answer = document
+        .getElementById("answer1")
+        .value
+        .trim();
+
+    if (answer === "499") {
+
+        document.getElementById("message1").innerHTML =
+            "Correct! 🚁🧱 One brick down...";
+
+        setTimeout(() => {
+
+            hideAll();
+
+            document.getElementById("riddle2")
+                .classList.remove("hidden");
+
+        }, 1200);
+
+    } else {
+
+        document.getElementById("message1").innerHTML =
+            "Nope! 😂 Think simple. 500 minus the one that fell.";
+
+    }
+
+}
+
+
+/* RIDDLE 2 */
+
+function checkRiddle2() {
+
+    let answer = document
+        .getElementById("answer2")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if (
+        answer.includes("abli") ||
+        answer.includes("open")
+    ) {
+
+        document.getElementById("message2").innerHTML =
+            "Correct! 🐘 Open it, put the elephant inside, then close it.";
+
+        setTimeout(() => {
+
+            hideAll();
+
+            document.getElementById("riddle3")
+                .classList.remove("hidden");
+
+        }, 1400);
+
+    } else {
+
+        document.getElementById("message2").innerHTML =
+            "Think about the first step. 👀 You need access to the inside first.";
+
+    }
+
+}
+
+
+/* RIDDLE 3 */
+
+function checkRiddle3() {
+
+    let answer = document
+        .getElementById("answer3")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if (
+        answer.includes("elephant") ||
+        answer.includes("elepante")
+    ) {
+
+        document.getElementById("message3").innerHTML =
+            "Exactly! 🐘➡️🦒 Someone has to leave first.";
+
+        setTimeout(() => {
+
+            hideAll();
+
+            document.getElementById("riddle4")
+                .classList.remove("hidden");
+
+        }, 1400);
+
+    } else {
+
+        document.getElementById("message3").innerHTML =
+            "Something is already inside the refrigerator... 👀";
+
+    }
+
+}
+
+
+/* RIDDLE 4 */
+
+function checkRiddle4() {
+
+    let answer = document
+        .getElementById("answer4")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if (
+        answer.includes("giraffe") ||
+        answer.includes("giraf")
+    ) {
+
+        document.getElementById("message4").innerHTML =
+            "Correct! 🦒 Still chilling in the refrigerator.";
+
+        setTimeout(() => {
+
+            hideAll();
+
+            document.getElementById("riddle5")
+                .classList.remove("hidden");
+
+        }, 1400);
+
+    } else {
+
+        document.getElementById("message4").innerHTML =
+            "Think about who never left the refrigerator. 😏";
+
+    }
+
+}
+
+
+/* RIVER */
+
+function wrongRiver() {
+
+    document.getElementById("message5").innerHTML =
+        "Wrong! 😂 Think about what happened at the crocodile party.";
+
+}
+
+
+function correctRiver() {
+
+    document.getElementById("message5").innerHTML =
+        "Correct! 🏊 The river is actually safe. 😏";
+
+    setTimeout(() => {
+
+        hideAll();
+
+        document.getElementById("finalRiddle")
+            .classList.remove("hidden");
+
+    }, 1500);
+
+}
+
+
+/* FINAL RIDDLE */
+
+function checkFinal() {
+
+    let answer = document
+        .getElementById("finalAnswer")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if (
+        answer.includes("brick") ||
+        answer.includes("bato") ||
+        answer.includes("bricks")
+    ) {
+
+        document.getElementById("finalMessage").innerHTML =
+            "😂 YES! The brick finally found you!";
+
+        setTimeout(() => {
+
+            hideAll();
+
+            document.getElementById("success")
+                .classList.remove("hidden");
+
+        }, 1600);
+
+    } else {
+
+        document.getElementById("finalMessage").innerHTML =
+            "Not quite! 🧱 Remember the very first riddle...";
+
+    }
+
+}
+
+
+/* REVEAL */
+
+function revealSurprise() {
+
+    hideAll();
+
+    document.getElementById("surprise")
+        .classList.remove("hidden");
+
+    createConfetti();
+
+}
+
+
+/* CONFETTI / HEARTS */
+
+function createConfetti() {
+
+    const symbols = [
+        "❤️",
+        "💕",
+        "💖",
+        "✨",
+        "🎉",
+        "💗"
+    ];
+
+    for (let i = 0; i < 60; i++) {
+
+        let item = document.createElement("div");
+
+        item.className = "heart";
+
+        item.innerHTML =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        item.style.left =
+            Math.random() * 100 + "vw";
+
+        item.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
+
+        item.style.animationDelay =
+            Math.random() * 2 + "s";
+
+        document.body.appendChild(item);
+
+        setTimeout(() => {
+            item.remove();
+        }, 6000);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+
